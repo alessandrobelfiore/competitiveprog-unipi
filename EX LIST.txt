@@ -1,0 +1,75 @@
+Leaders in array
+Kadane 
+Missing number
+Trapping rain water
+Sliding window max
+
+Next larger el
+Towers
+Finding Team Member
+
+Inversion count
+Largest Even Number
+
+Firing Employees
+Check for BST
+Preorder traversal BST
+Maximum path sum
+
+Ilya and Queries
+Alice
+Bob and chocolate
+Number of ways
+Little girl and maximum sum
+
+Megacity
+Find pair
+Two heaps
+
+Update the array
+
+Nested segments 
+Nested segments with segm Tree
+Pashmak and Parmida
+
+Circular RMQ
+
+Powerful array
+Tree and queries
+
+QTREE
+QTREE 2
+QTREE 3
+GOT
+Chef and the tree
+
+Longest common subseq
+0-1 knapsack
+
+Subset sum
+Min number of jumps
+Edit distance
+
+Longest incr subseque
+Longest bitonic subseque
+
+Vertex cover
+Longest palindromic sub
+
+N meetings in one room
+Magic numbers
+Wilbur and array
+Alternative thinking
+
+Lexicographical max sub
+Woodcutters
+Queue
+
+X total shapes
+IsBipartite
+Fox and names
+
+Learning languages
+Checkposts
+
+Min spanning tree
