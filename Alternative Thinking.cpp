@@ -29,10 +29,10 @@ void solve(int l, int* arr) {
 }
 
 int main () {
-  int arr[100000] {};
+  /* int arr[100000] {}; */
   int length;
   cin >> length;
-  /* int* arr = (int*) malloc(sizeof(int) * length); */
+  int* arr = (int*) malloc(sizeof(int) * length);
   for (int i = 0; i < length; i++) {
     cin >> arr[i];
   }
