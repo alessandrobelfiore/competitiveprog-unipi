@@ -40,4 +40,5 @@ int main () {
   cin >> number;
   string result = isMagic(number) == 1 ? "YES" : "NO";
   cout << result;
+  return 0;
 }
