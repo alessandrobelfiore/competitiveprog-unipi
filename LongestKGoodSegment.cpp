@@ -1,91 +1,56 @@
 #include <iostream>
 #include <stdio.h>
 #include <algorithm>
-#include <set>
 #include <climits>
+#include <cstring>
 using namespace std;
 
+const int N = 1000001;
 
 void solve(long* arr, long k, long n) {
 
-  // initialize a set of k positions
-  set<pair<long, long>> numbers; // values are - number and index of its last occurence
-  long index = -1;
-  long start = 0;
-  long current = 0;
-  long max = 0;
-  pair<long, long> ans;
+  // array size n to store number of occurences of all n
+  int* occs = (int*) malloc(sizeof(int) * N);
+  memset(occs, 0, sizeof(occs));
 
-  while (++index < n) {
-    long value = arr[index];
-    /* cout << "debug: read value: " << value << endl; */ 
-    auto item = std::find_if(numbers.begin(), numbers.end(),
-      [&value](std::pair<long, long> const & ref) {
-        return ref.first == value;
-        }
-    );
-    // number is present, upd last occ
-    if (item != numbers.end()) {
-      /* cout << "debug: value already present" << endl; */ 
-      current++;
-      numbers.erase(item);
-      numbers.insert(make_pair(value, index));
-    }
-    // not present
-    else {
-      if (numbers.size() < k) {
-        /* cout << "debug: value not present" << endl; */ 
-        current++;
-        numbers.insert(make_pair(value, index));
+  long distinct = 0; // number of distinct occurences
+  pair<long, long> ans = make_pair(-1, -1); // best bounds found so far
+  int index = 0;
+  // i -> left end, index -> right end
+  for (long i = 0; i < n; i++) {
+    // move right bound until segment in no good
+    while (index < n) {
+      if (++occs[arr[index]] == 1) distinct++;
+      // when segment is no good interrupt
+      if (distinct > k) {
+        if (--occs[arr[index]] == 0) distinct--;
+        /* cout << "too many" << endl; */
+        break;
       }
-      // too many numbers
-      else {
-        /* cout << "debug: current " << current << endl; */
-        if (current >= max) {
-          /* cout << "debug: too many numbers" << endl; */ 
-          max = current;
-          ans = make_pair(start, index - 1);
-        }
-
-        // eliminate the number with the least last occ
-        long lastOccurence = LONG_MAX;
-        long culprit = 0;
-        for (auto x : numbers) {
-          if (x.second < lastOccurence)  {
-            lastOccurence = x.second;
-            culprit = x.first;
-          }
-        }
-        /* cout << "debug: eliminating " << culprit << endl;  */
-        numbers.erase(make_pair(culprit, lastOccurence));
-        numbers.insert(make_pair(value, index));
-        start = lastOccurence + 1;
-        current = index - start;
-        
-        /* cout << "debug: start " << start << endl;  */
-      }
+      index++;
     }
+    // check if calculated boounds are better than the current max
+    if ((ans.second - ans.first) < (index - i)) ans.first = i, ans.second = index;
+    // restart moving left bound by 1
+    if (--occs[arr[i]] == 0) distinct--;
   }
 
-  if (current > max) {
-    ans.first = start;
-    ans.second = index - 1;
-  }
-  cout << ans.first + 1 << " " << ans.second + 1 << endl; 
+  cout << ans.first + 1 << " " << ans.second << endl; 
   //printf("%ld %ld", ans.first + 1, ans.second + 1);
 }
 
 int main() {
-    long n, k = 0;
-    cin >> n;
-    cin >> k;
-    long* arr = (long*) malloc(sizeof(long) * n);
-    for (long i = 0; i < n; i ++) {
-      long x = 0;
-      scanf("%ld", &x);
-      arr[i] = x;
-    }
-    // return longest k-good segment
-    solve(arr, k, n);
+  long n = 0;
+  long k = 0;
+  cin >> n;
+  cin >> k;
+  long* arr = (long*) malloc(sizeof(long) * n);
+  for (long i = 0; i < n; i ++) {
+    long x = 0;
+    scanf("%ld", &x);
+    arr[i] = x;
+  }
+  // return longest k-good segment
+  solve(arr, k, n);
 	return 0;
 }

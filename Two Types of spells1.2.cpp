@@ -23,10 +23,10 @@ void printDamage(deque<pair<long, int>> spells, int fire_n) {
     item = spells[spells.size() - 2];
     spells.erase(spells.end() - 2);
   }
-
   else {
     spells.pop_back();
   }
+
   damage += get<0> (item);
 
   long long count = spells.size();
@@ -39,8 +39,10 @@ void printDamage(deque<pair<long, int>> spells, int fire_n) {
   }
   // for any spell left, use the highest if was_l, lowest o.w.
   for (long long i = 0; i < count; i++) {
+    // last one was a lightning spell
     if (was_l) {
       item = spells.front();
+      // got a fire spell
       if (get<1> (item) == 0 && fire_used == (fire_n - 1) && spells.size() > 1) {
         item = spells[1];
         spells.erase(spells.begin() + 1);
@@ -49,6 +51,7 @@ void printDamage(deque<pair<long, int>> spells, int fire_n) {
         spells.pop_front();
       }
       damage = damage + (2 * get<0> (item));
+      // last one was a fire spell
     } else {
       item = spells.back();
       if (get<1> (item) == 0 && fire_used == (fire_n - 1) && spells.size() > 1) {

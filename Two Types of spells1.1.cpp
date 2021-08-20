@@ -27,8 +27,8 @@ void printDamage(deque<pair<long, int>> spells, int fire_n, int light_n) {
       chosen_spells.push_back(get<0> (item));
       if (get<1> (item) == 1) light_chosen_n++;
     }
-    // if they are all light -> choose the next highest fire instead, if possible
 
+    // if they are all light -> choose the next highest fire instead, if possible
     if (light_chosen_n == light_n) {
       if (spells.size() >= 1) {
         // remove lowest light, add highest fire
