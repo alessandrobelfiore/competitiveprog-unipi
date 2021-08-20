@@ -1,19 +1,20 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <cstring>
 
 using namespace std;
 
 struct fenwick {
   vector<int> tree;
 
-  fenwick(int n) : tree(n + 1) {}
+  fenwick(int n) : tree(n + 1, 0) {}
 
   fenwick(int* arr, int n) 
     : tree(n + 1) {
     // build fenwick tree
     for (int k = 0; k < n; ++k) tree[k+1] = arr[k];
-    for (int k = 1; k+(k&-k) < n; ++k) tree[k+(k&-k)] += tree[k];
+    for (int k = 1; k+(k&-k) < n+1; ++k) tree[k+(k&-k)] += tree[k];
   }
 
   fenwick(vector<int> v) 
@@ -73,28 +74,20 @@ int main() {
   // build suffix count
   vector<int> suffix (n, 0);
   vector<int> occs (n, 0);
+  fenwick F(n);
   for (int i = n - 1; i >= 0; i--) {
     occs[a[i]] ++;
     suffix[i] = occs[a[i]];
+    F.add(occs[a[i]], 1);
   }
 
-  vector<int> B (n + 1, 0);
-  for (int i = 0; i < n; i++) {
-    B[suffix[i]] ++;
-  }
-  // build FT on number of occurences of suffix count
-  fenwick F(B);
-
-  vector<int> occsA (n + 1, 0);
+  vector<int> occsA (n, 0);
   // read array from left to right, get occurences
-  for (int i = 0; i < n - 1; i++) {
+  for (int i = 0; i < n; i++) {
     int k = occsA[a[i]];
     occsA[a[i]] ++;
     F.add(suffix[i], -1);
-    int64_t tmp = F.sum(k);
     res += F.sum(k);
-    cout << "adding " << tmp << endl;
   }
-
   cout << res << endl;
 }
