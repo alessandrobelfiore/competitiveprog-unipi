@@ -1,3 +1,10 @@
+/* There is one meeting room in a firm. There are N meetings 
+    in the form of (start[i], end[i]) where start[i] is start time of meeting i 
+    and end[i] is finish time of meeting i. We have to find the maximum number of meetings possible.
+    We simply order them by increasing ending time and select greedily if the 
+    starting time does not conflict with the previous meetings.
+ */
+
 class Solution{
     public:
         int maxMeetings(int start[], int end[], int n) {

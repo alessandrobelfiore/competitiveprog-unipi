@@ -1,3 +1,8 @@
+/*  We just need to compute a prefix sum of the characters equal in the string,
+    and for each query return the difference between the value of the right end 
+    and the left one.
+ */
+
 #include <iostream>
 #include <string>
 using namespace std;

@@ -1,3 +1,7 @@
+/*  We need to find the classical edit distance between two strings,
+    so we use dynamic programming and a matrix n x m.
+ */
+
 class Solution {
   public:
     int min(int a, int b, int c) {

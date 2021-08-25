@@ -1,3 +1,10 @@
+/*  We need to find the maximum path sum between two leaves.
+
+    We calculate it recursively, returning the value if it's a leaf, 
+    finding the maximum subtree and deciding, if it's an internal node,
+    if connecting the leaves of the subtrees or just communicate the max subtree.
+*/
+
 int recursivePathMax(Node* root, int* max) {
     if (root == NULL) return INT_MIN;
     
@@ -7,7 +14,6 @@ int recursivePathMax(Node* root, int* max) {
     // else return max between maxPathSum left and right
     int left = recursivePathMax(root->left, max);
     int right = recursivePathMax(root->right, max);
-    
     
     // current path max
     int max1 = left >= right ? left + root->data : right + root->data;

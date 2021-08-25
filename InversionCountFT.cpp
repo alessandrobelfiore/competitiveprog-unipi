@@ -1,3 +1,8 @@
+/*  We need to count the number of pairs, i < j and A[i] > A[j], 
+    called inversions. 
+
+ */
+
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -55,8 +60,8 @@ int main() {
 
   vector<int64_t> ans (n_test, 0);
   for (int index = 0; index < n_test; index++) {
-  vector<int64_t> a;
-  vector<int64_t> support;
+    vector<int64_t> a;
+    vector<int64_t> support;
     int n;
     cin >> n;
     for (int j = 0; j < n; j++) {

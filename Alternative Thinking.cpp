@@ -1,3 +1,11 @@
+/*  We need to find the longest alternating sequence, not contingous,
+    in a binary sequence and prolong it by inverting a subsequence of bits.
+    To obtain the result we just count the longest alternating sequence and
+    at the same time check if we encounter couples(00 11) or triples(000 111),
+    then we return the longest a. s. plus 1 we found at lest a couple or plus
+    2 if we found 2 or more couples and/or a triple.
+*/
+
 #include <iostream>
 
 using namespace std;

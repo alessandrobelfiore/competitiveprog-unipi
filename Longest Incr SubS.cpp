@@ -1,5 +1,8 @@
 // slow solution
 
+/*   We need to find longest increasing subsequence using dynamic programming 
+ */
+
 class Solution{
     public:
     // return length of longest strictly increasing subsequence

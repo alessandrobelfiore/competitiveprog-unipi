@@ -1,3 +1,8 @@
+/*  We are given n segments on a line. There are no ends of some segments that coincide. For each segment 
+    we have find the number of segments it contains. We remap segments using rank, we sort them 
+    by left margin, decreasingly. Then we use a fenwick tree to add these values and compute the prefix sum
+ */
+
 #include <iostream>
 #include <vector>
 #include <algorithm>

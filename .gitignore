@@ -1,2 +1,10 @@
 /.vscode
 *.out
+*.txt
+
+judge.cpp
+populate.cpp
+test.cpp
+
+a
+a1

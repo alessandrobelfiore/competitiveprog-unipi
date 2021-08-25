@@ -1,3 +1,6 @@
+/* Classical knapsack problem, we solve it using dynamic programming 
+ */
+
 #include <iostream>
 
 using namespace std;

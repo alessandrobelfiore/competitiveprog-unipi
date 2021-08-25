@@ -1,3 +1,10 @@
+/* Given an initial array of zeroes we have to transform it in the given array in 
+    the minimum amount of steps. At each step we can add 1 or subtract 1 
+    to all items from i to the right end.
+    We simply examine the array from left to right and add to the result
+    the difference in absolute value, between the current elemenent and the one before.
+ */
+
 #include <iostream>
 
 using namespace std;

@@ -1,3 +1,8 @@
+/*  We need to find the longest bitonic sequence.
+    First we calculate the longest increasing sequence and the longest decreasing sequence,
+    via dynamic programming, then we sum them for each index to find the max bitonic seq.
+ */
+
 #include <vector>
 #include <iostream>
 

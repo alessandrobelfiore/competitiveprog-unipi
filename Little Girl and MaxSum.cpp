@@ -1,3 +1,10 @@
+/*  We have an array and a number of queries. For each query l, r we have to return the sum of the elements
+    from l to r but we have to reorder the array first, in order to obtain the max result possible.
+    We compute the frequencies of the indices based on the number of queries that contain them,
+    and we build the prefix sum of the frequencies. Then we order the array and the frequencies in the same
+    order, so we can pick the max number the max number of frequencies. 
+ */
+
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -42,11 +49,10 @@ int main() {
     cin >> l;
     cin >> r;
     freq[r - 1] ++;
-    if (l != 1)
-        freq[l - 2] --;
+    if (l != 1) freq[l - 2] --;
   }
 
-  // prefix sum OUT OF BOUND ? FIXME
+  // prefix sum 
   for (int64_t i = n - 1; i >= 0; i--) {
     freq[i - 1] += freq[i];
   }

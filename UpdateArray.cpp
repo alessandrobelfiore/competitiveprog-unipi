@@ -1,3 +1,7 @@
+/*  We need to perform a number of range updates on an array, and then
+    answer a number of queries. We do this employing a Fenwick Tree.
+ */
+
 #include <iostream>
 #include <vector>
 //#include "fenwick.hpp"

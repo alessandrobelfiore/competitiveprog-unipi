@@ -1,3 +1,9 @@
+/*  We need to distinguish if the number we receive is a magic number given that
+    a magic number is a number formed by concatenation of numbers 1, 14 and 144.
+    We simply read the digits left to right, remembering if we encountered 1 or 2 
+    occurences of 4.
+ */
+
 #include <iostream>
 #include <string>
 using namespace std;

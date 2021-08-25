@@ -1,3 +1,7 @@
+/*   We need to find the longest palindrome. We simply use dynamic programming
+    with the string and the reserve of itself.
+ */
+
 int max(int a, int b, int c) {
     if (a >= b && a >= c) return a;
     else if (b >= a && b >= c) return b;

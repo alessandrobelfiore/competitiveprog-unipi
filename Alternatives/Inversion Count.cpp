@@ -3,9 +3,6 @@
 #include <vector>
 using namespace std;
 
-/* int _mergeSort(int arr[], int temp[], int left, int right);
-int merge(int arr[], int temp[], int left, int mid, int right); */
-
 /* This function sorts the
 input array and returns the
 number of inversions in the array */
@@ -77,7 +74,6 @@ int merge(int arr[], int temp[], int left, int mid,
 	return inv_count;
 }
 
-// Driver code
 int main()
 {
 	int arr[] = { 1, 20, 6, 4, 5 };

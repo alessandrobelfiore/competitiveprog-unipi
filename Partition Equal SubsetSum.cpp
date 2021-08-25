@@ -1,3 +1,7 @@
+/*   
+
+ */
+
 class Solution{
 public:
   int equalPartition(int N, int arr[])

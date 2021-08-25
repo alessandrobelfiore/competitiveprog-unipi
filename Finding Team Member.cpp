@@ -1,3 +1,8 @@
+/*  We need to find the strongest pairings between a number of indices, given the power 
+    of every couple of indices. We just sort the values and select them greedily,
+    eliminating the couples we cannot choose anymore after each step.
+ */
+
 #include <iostream>
 #include <vector>
 #include <algorithm>

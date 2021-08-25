@@ -1,3 +1,10 @@
+/*  We need to find the next larger element of each element in the array.
+    We mantain a queue in which we insert one element at a time, in order to find
+    its NLE. We then read elements of the array one element to the right from the last
+    element inserted in the queue and save the answer if they are greater than some 
+    elements in the queue.
+ */
+
 #include <iostream>
 #include <deque>
 #include <vector>
@@ -29,15 +36,6 @@ void printNLE(long array[], long length) {
         }
         support.push_front(make_pair(array[i], i));
     }
-    //it = support.begin();
-    //while (it != support.end() && !support.empty()) {
-        //int index = support.front().second;
-        //cout << index << " ";
-        //solutions.insert(solutions.begin() + index, -1);
-        //support.pop_front();
-        //cout << "-1";
-    //    it++;
-    //}
     
     for (vector<long>::iterator it = solutions.begin() ; it != solutions.end(); ++it)
         cout << *it << ' ';
@@ -50,7 +48,6 @@ int main() {
     for (int i = 0; i < n_tests; i ++) {
         long length = 0;
         cin >> length;
-        // FIXME
         long* arr = (long*) malloc(sizeof(long) * length);
         for (int j = 0; j < length; j ++) {
             long x = 0;

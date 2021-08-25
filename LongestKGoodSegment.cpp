@@ -1,3 +1,8 @@
+/*  We need to find the longest segment which contains no more than k distinct digits.
+    We keep counts of the occurences of each digits, moving the right bound of the segment 
+    until the segment is no good anymore, then we move the left segment by 1.
+  */
+
 #include <iostream>
 #include <stdio.h>
 #include <algorithm>
@@ -24,7 +29,6 @@ void solve(long* arr, long k, long n) {
       // when segment is no good interrupt
       if (distinct > k) {
         if (--occs[arr[index]] == 0) distinct--;
-        /* cout << "too many" << endl; */
         break;
       }
       index++;
@@ -36,7 +40,6 @@ void solve(long* arr, long k, long n) {
   }
 
   cout << ans.first + 1 << " " << ans.second << endl; 
-  //printf("%ld %ld", ans.first + 1, ans.second + 1);
 }
 
 int main() {

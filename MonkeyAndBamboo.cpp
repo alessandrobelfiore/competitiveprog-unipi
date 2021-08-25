@@ -1,3 +1,11 @@
+/*  We need to find the least force needed to go from each element in the 
+    array to the following one. If the distance from the elements is exactly
+    our current force, our force decreases by one. We cannot cover a distance > force.
+
+    We loop the array from right to left, we set the force needed to the distance if 
+    the distance is greater, we increment the force by one if they are equal.
+ */
+
 #include <iostream>
 
 using namespace std;

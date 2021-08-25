@@ -29,15 +29,6 @@ void printNLE(int array[], int length) {
         }
         support.push_front(make_pair(array[i], i));
     }
-    //it = support.begin();
-    //while (it != support.end() && !support.empty()) {
-        //int index = support.front().second;
-        //cout << index << " ";
-        //solutions.insert(solutions.begin() + index, -1);
-        //support.pop_front();
-        //cout << "-1";
-    //    it++;
-    //}
     
     for (vector<int>::iterator it = solutions.begin() ; it != solutions.end(); ++it)
         cout << *it << ' ';

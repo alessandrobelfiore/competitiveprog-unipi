@@ -1,3 +1,8 @@
+/*  We need to find the missing number in a array of all 1-N elements minus one.
+    We simply calculate the sum of all the numbers in the array and find the difference
+    between it and the expected sum of all N elements.
+ */
+
 #include <iostream>
 using namespace std;
 

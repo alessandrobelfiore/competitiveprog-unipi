@@ -1,3 +1,13 @@
+/*  We've got array a[1], a[2], ..., a[n], consisting of n integers. Count 
+    the number of ways to split all the elements of the array into three contiguous
+    parts so that the sum of elements in each part is the same.
+  
+    We maintain an array of size n, with 1's for each time the suffix from that
+    index is a 1/3 of the sum. We then compute its suffix sum, we start computing prefixes
+    and each time a prefix sums up to 1/3 of the sum we add to the total the suffix[i + 2]
+    element.
+ */
+
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -18,7 +28,6 @@ void numberOfWays(int64_t arr[], int64_t size, int64_t sum) {
   for (int64_t i = 0; i < size; i++) {
     suffix[i] = 0;
   }
-  
   
   for (int64_t i=(size - 1); i >= 0; i--) {
     currentSum += arr[i];

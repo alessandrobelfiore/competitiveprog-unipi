@@ -1,3 +1,11 @@
+/*  We need to find the maximum damage possible, using fire spells and 
+    lightning spells. Lightning spells double the power of the the next spell used.
+    We then forget or learn a new spell each step.
+    We maintain a set for the highest power spells, as many as the number of lightining spells,
+    and a set for the others spells. We can't have all lightining spells in the 
+    highest power set.
+ */
+
 #include <iostream>
 #include <algorithm>
 #include <utility>

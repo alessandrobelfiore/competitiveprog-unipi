@@ -1,3 +1,8 @@
+/*  We need to find every element of an array which are greater than or equal to all the elements to its right side.
+    We simply read the array from right to left, update the current maximum found, and add
+    an element to the list of leaders when it is a new maximum.
+ */
+
 #include <iostream>
 #include <vector>
 using namespace std;
