@@ -9,35 +9,38 @@
 
 using namespace std;
 
-int solveVC(vector<vector<int>>* matrix, vector<int>* supp, int index) {
+int solveVC(vector<vector<int>>& matrix, vector<int>& supp, int index, int parent) {
   
   //  if we already calculated this subtree vc
-  if (supp->at(index) != -1) return supp->at(index);
+  if (supp[index] != -1) return supp[index];
 
-  // if it has not children
-  if (matrix->at(index).size() == 0) {
-    /* cout << index + 1 << " empty" << endl; */
-    supp->at(index) = 0;
+  // if it has no children (is a leaf)
+  if (matrix[index].size() == 1 && matrix[index][0] == parent) {
+    supp[index] = 0;
     return 0;
   }
 
-  // if we take the root
+  // if we take the root, take 1 and recur on children
   int withRoot = 1;
-  for (auto x : matrix->at(index)) {
-    withRoot += solveVC(matrix, supp, x);
+  for (auto x : matrix[index]) {
+    if (x != parent)
+    withRoot += solveVC(matrix, supp, x, index);
   }
 
-  // if we take all children of the root instead
-  int withoutRoot = matrix->at(index).size();
-  for (auto x : matrix->at(index)) {
-    for (auto y : matrix->at(x)) {
-      withoutRoot += solveVC(matrix, supp, y);
+  // if we don't take root, take number of children and recur on grand-children
+  int withoutRoot = matrix[index].size();
+  if (parent != -1) withoutRoot--; // if I'm not on the root, subtract 1 for parent
+  for (auto x : matrix[index]) {
+    if (x != parent)
+    for (auto y : matrix[x]) {
+      if (y != index)
+      withoutRoot += solveVC(matrix, supp, y, x);
     }
   }
 
   // store the calculated min vc before returning it
   int min = withRoot >= withoutRoot ? withoutRoot : withRoot;
-  supp->at(index) = min;
+  supp[index] = min;
   return min;
 }
 
@@ -54,49 +57,17 @@ int main() {
   vector<vector<int>> adj(n);
   // saved previous solutions
   vector<int> support(n, -1);
-  // introduced to permit trees with parent with higher index than children
-  vector<int> used(n, -1);
 
   // setup the matrix of adjacencies to represent the tree
   for (int i = 0; i < n - 1; i++) {
     int x, y;
     cin >> x;
     cin >> y;
-    int min, max = 0;
-    
-    if (x < y) {
-      min = x;
-      max = y;
-    } else {
-      min = y;
-      max = x;
-    }
 
-    if (used[min - 1] != -1 || i == 0) {
-      adj[min - 1].push_back(max - 1);
-      used[max - 1] = 1;
-    }
-    else {
-      adj[max - 1].push_back(min - 1);
-      used[min - 1] = 1;
-    }
+    adj[x - 1].push_back(y - 1);
+    adj[y - 1].push_back(x - 1);
   }
 
-  int root;
-
-  // find the actual root?
-  for (int j = 0; j < used.size(); j++) {
-    if (used[j] == -1) root = j;
-  }
-
-  /* for (auto x : adj) {
-    for (auto y : x) {
-      cout << y + 1 << " ";
-    }
-    cout << endl;
-  } */
-
-  /* cout << root << endl; */
-  int ans = solveVC(&adj, &support, root);
+  int ans = solveVC(adj, support, 0, -1);
   cout << ans << endl;
 }
