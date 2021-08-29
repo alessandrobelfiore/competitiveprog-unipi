@@ -1,3 +1,5 @@
+/* Mo's alg */
+
 #include <iostream>
 #include <vector>
 #include <algorithm>
