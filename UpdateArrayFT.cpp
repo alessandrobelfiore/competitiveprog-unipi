@@ -1,5 +1,7 @@
 /*  We need to perform a number of range updates on an array, and then
     answer a number of queries. We do this employing a Fenwick Tree.
+    Since the array is initially all zeroes we can simply return the
+    prefix sum until the index requested.
  */
 
 #include <iostream>
@@ -61,14 +63,11 @@ int main() {
     int l, r, v;
     for (int j = 0; j < u; j++) {
       scanf("%d%d%d", &l, &r, &v);
-      /* cout << "update with " << l << r << v << endl; */
       f.add(l, v);
       f.add(r + 1, (-1) * v);
-      /* cout << "update n: " << j << endl;  */
     }
     int q;
     cin >> q;
-    /* cout << "queries n: " << q << endl; */
     int x;
     for (int k = 0; k < q; k++) {
       scanf("%d", &x);

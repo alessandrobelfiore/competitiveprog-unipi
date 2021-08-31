@@ -65,7 +65,9 @@ int main() {
   cin >> n;
 
   vector<segment> segs;
+  segs.reserve(n);
   vector<int64_t> values;
+  values.reserve(2 * n);
 
   int64_t l, r;
   for (int i = 0; i < n; i++) {

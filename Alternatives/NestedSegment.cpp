@@ -1,3 +1,5 @@
+/* alternative approach, might be bugged */
+
 #include <iostream>
 #include <algorithm>
 #include <vector>
@@ -55,78 +57,45 @@ int64_t *constructST(int64_t arr[], int64_t n)
     return st;  
 }
 
-int64_t getSumUtil(int64_t *st, int64_t ss, int64_t se, int64_t qs, int64_t qe, int64_t si)  
-{  
-  // total overlap 
-  if (qs <= ss && qe >= se)  
-    return st[si];
+// segment tree functions
+int64_t getSum(int64_t segTree[], int qleft, int qright, int left, int right, int pos) {
+
+  if (left > right) {
+    return 0;
+  }
+  
+  // total overlap
+  if (qleft <= left && qright >= right) {
+    return segTree[pos];
+  }
 
   // no overlap
-  if (se < qs || ss > qe)  
-    return 0;  
+  if (qleft > right || qright < left) {
+    return 0;
+  }
 
   // partial overlap
-  int64_t mid = getMid(ss, se);  
-  return getSumUtil(st, ss, mid, qs, qe, 2*si+1) +  
-    getSumUtil(st, mid+1, se, qs, qe, 2*si+2);  
-} 
-
-int64_t getSum(int64_t *st, int64_t n, int64_t qs, int64_t qe)  
-{  
-  // Check for erroneous input values  
-  if (qs < 0 || qe > n || qs > qe)  
-  {  
-      cout<<"Invalid Input";  
-      return -1;  
-  }  
-
-  return getSumUtil(st, 0, n-1, qs, qe, 0);  
+  int64_t mid = (left + right) / 2;
+  return  getSum(segTree, qleft, qright, left, mid, (2 * pos) + 1) +
+          getSum(segTree, qleft, qright, mid + 1, right, (2 * pos) + 2);
 }
+ 
+void updatePoint(int64_t segTree[], int index, int64_t diff, 
+                int left, int right, int pos) {
+  
+  if (left > right) { return; }
 
-/* A recursive function to update the nodes which have the given  
-index in their range. The following are parameters  
-    st, si, ss and se are same as getSumUtil()  
-    i --> index of the element to be updated. This index is  
-            in the input array.  
-diff --> Value to be added to all nodes which have i in range */
-void updateValueUtil(int64_t *st, int64_t ss, int64_t se, int64_t i, int64_t diff, int64_t si)  
-{  
-    // Base Case: If the input index lies outside the range of  
-    // this segment  
-    if (i < ss || i > se)  
-        return;  
-  
-    // If the input index is in range of this node, then update  
-    // the value of the node and its children  
-    st[si] = st[si] + diff;  
-    if (se != ss)  
-    {  
-        int64_t mid = getMid(ss, se);  
-        updateValueUtil(st, ss, mid, i, diff, 2*si + 1);  
-        updateValueUtil(st, mid+1, se, i, diff, 2*si + 2);  
-    }  
-}  
-  
-// The function to update a value in input array and segment tree.  
-// It uses updateValueUtil() to update the value in segment tree  
-void updateValue(int64_t arr[], int64_t *st, int64_t n, int64_t i, int64_t new_val)  
-{  
-    // Check for erroneous input index  
-    if (i < 0 || i > n-1)  
-    {  
-        cout<<"Invalid Input";  
-        return;  
-    }  
-  
-    // Get the difference between new value and old value  
-    int64_t diff = new_val - arr[i];  
-  
-    // Update the value in array  
-    arr[i] = new_val;  
-  
-    // Update the values of nodes in segment tree  
-    updateValueUtil(st, 0, n-1, i, diff, 0);  
-}  
+  // index is outside the segment range
+  if (index > right || index < left) { return; }
+
+  // update node and recur on children
+  segTree[pos] += diff;
+  if (right != left) {
+    int64_t mid = (left + right) / 2;
+    updatePoint(segTree, index, diff, left, mid, pos * 2 + 1);
+    updatePoint(segTree, index, diff, mid + 1, right, pos * 2 + 2);
+  }
+}
 
 
 int main() {
@@ -134,7 +103,7 @@ int main() {
   cin >> n;
   vector<tuple<int64_t, int64_t, int>> vect;
   vector<int> values;
-  int size = 2 * n;
+  int size = n;
 
   for (int i = 0; i < n; i++) {
     int64_t l, r = 0;
@@ -178,8 +147,10 @@ int main() {
   int64_t* st = constructST(arr, size);
 
   for (int i = 0; i < n; i++) {
-    res[get<2> (vect[i])] = getSum(st, size, get<0>(vect[i]) + 1, get<1> (vect[i]));
-    updateValue(arr, st, size, get<0>(vect[i]), 0);
+    res[get<2> (vect[i])] = getSum(st, 
+              get<0>(vect[i]) + 1, get<1> (vect[i]), 0, n - 1, 0);
+
+    updatePoint(st, get<0>(vect[i]), -1, 0, n - 1, 0);
   } 
 
   for (int i = 0; i < n; i++) {

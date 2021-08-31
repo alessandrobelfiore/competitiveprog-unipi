@@ -10,7 +10,7 @@
 #include <algorithm>
 using namespace std;
 
-void computeMaxSum(int64_t arr[], int64_t freq[], int64_t n, int64_t q) {
+void computeMaxSum(int64_t arr[], int64_t freq[], int64_t n) {
 
   int64_t sum = 0;
   vector<int64_t> vect(arr, arr + n);
@@ -57,6 +57,6 @@ int main() {
     freq[i - 1] += freq[i];
   }
 
-  computeMaxSum(freq, arr, n, q);
+  computeMaxSum(freq, arr, n);
 	return 0;
 }

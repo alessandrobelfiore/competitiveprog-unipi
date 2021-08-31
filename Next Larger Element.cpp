@@ -11,35 +11,62 @@
 #include <utility>   
 using namespace std;
 
-void printNLE(long array[], long length) {
-    deque<pair <long, long>> support;
+// use this in G4G site
+class Solution {
+  public:
+  vector<long long> nextLargerElement(vector<long long> arr, int n){
+    deque<pair <long, long>> support;   // array of elements for which we still look for NLE
     deque<pair <long, long>>::iterator it = support.begin();
     
-    vector<long> solutions;
-    vector<long>::iterator it1 = solutions.begin();
-    for (long i = 0; i < length; i++) {
-        solutions.push_back(-1);
-    }
-    solutions.reserve(length);
-    support.push_front(make_pair(array[0], 0));
-    for (long i = 1; i < length; i++) {
-        it = support.begin();
-        while (it != support.end()) {
-            if (array[i] > (*it).first) {
-                int index = support.front().second;
-                //cout << index << " ";
-                solutions.at(index) = array[i];
-                support.pop_front();
-                //cout << array[i] << " ";
-                it++;
-            } else break;
-        }
-        support.push_front(make_pair(array[i], i));
-    }
+    vector<long long> solutions(n, -1);
+    vector<long long>::iterator it1 = solutions.begin();
     
-    for (vector<long>::iterator it = solutions.begin() ; it != solutions.end(); ++it)
-        cout << *it << ' ';
-    cout << endl;
+    support.push_front(make_pair(arr[0], 0));
+    // loop through array left to right
+    for (long i = 1; i < n; i++) {
+      it = support.begin();
+      // loop through supp array and check if curr value is 
+      // greater than some values that still need NLE
+      while (it != support.end()) {
+        if (arr[i] > (*it).first) {
+          int index = support.front().second;
+          solutions.at(index) = arr[i];
+          support.pop_front();
+          it++;
+        } else break;
+      }
+      support.push_front(make_pair(arr[i], i));
+    }
+    return solutions;
+  }
+};
+
+void printNLE(long array[], long length) {
+  deque<pair <long, long>> support;
+  deque<pair <long, long>>::iterator it = support.begin();
+  
+  vector<long> solutions(length, -1);
+  vector<long>::iterator it1 = solutions.begin();
+
+  support.push_front(make_pair(array[0], 0));
+  for (long i = 1; i < length; i++) {
+    it = support.begin();
+    while (it != support.end()) {
+      if (array[i] > (*it).first) {
+        int index = support.front().second;
+        //cout << index << " ";
+        solutions.at(index) = array[i];
+        support.pop_front();
+        //cout << array[i] << " ";
+        it++;
+      } else break;
+    }
+    support.push_front(make_pair(array[i], i));
+  }
+  
+  for (vector<long>::iterator it = solutions.begin() ; it != solutions.end(); ++it)
+    cout << *it << ' ';
+  cout << endl;
 }
 
 int main() {

@@ -11,7 +11,7 @@ int* computePrefixSum(string s) {
   int n = s.size();
   int* sums = (int* ) malloc(sizeof(int) * n);
   sums[0] = 0;
-  for (int i=1; i<n; i++) {
+  for (int i = 1; i < n; i++) {
     if (s[i] == s[i - 1]) {
       sums[i] = sums[i - 1] + 1;
     }

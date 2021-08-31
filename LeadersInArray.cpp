@@ -7,6 +7,27 @@
 #include <vector>
 using namespace std;
 
+// use this to test on G4G site
+class Solution{
+    //Function to find the leaders in the array.
+    public:
+    vector<int> leaders(int a[], int n){
+    
+        vector<int> leaders;
+        int max = a[n - 1];
+        leaders.push_back(max);
+        for (int i = n - 2; i >= 0; i --) {
+            if (a[i] >= max) {
+                max = a[i];
+                leaders.push_back(max);
+            }
+        }
+        reverse(leaders.begin(), leaders.end());
+        return leaders;
+    }
+};
+
+// test code
 void printLeaders(int array[], int length) {
     vector<int> leaders;
     int max = array[length - 1];

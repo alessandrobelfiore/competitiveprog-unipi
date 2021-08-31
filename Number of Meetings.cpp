@@ -5,6 +5,10 @@
     starting time does not conflict with the previous meetings.
  */
 
+#include <vector>
+#include <algorithm>
+using namespace std;
+
 class Solution{
     public:
         int maxMeetings(int start[], int end[], int n) {

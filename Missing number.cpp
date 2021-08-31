@@ -4,8 +4,23 @@
  */
 
 #include <iostream>
+#include <vector>
 using namespace std;
 
+// use this to test on G4G site
+class Solution{
+  public:
+    int MissingNumber(vector<int>& array, int n) {
+        long long sum = 0;
+        long long expected_sum = (n * (n + 1)) / 2;
+        for (int i = 0; i < n - 1; i++) {
+            sum = sum + array[i];
+        }
+        return (expected_sum - sum);
+    }
+};
+
+// local test code
 void printMissing(int arr[], int length) {
     int sum = 0;
     int expected_sum = (length * (length + 1)) / 2;
@@ -14,7 +29,6 @@ void printMissing(int arr[], int length) {
     }
     cout << (expected_sum - sum) << endl;
 }
-
 
 int main() {
 	int n_tests = 0;

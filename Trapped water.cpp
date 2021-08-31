@@ -1,52 +1,36 @@
+/*    We use 2 arrays to save the maximum height of the towers on the left and on the right of the index.
+      The solution is difference between the minimum of these 2 values and the value at the current index
+ */
+
 #include <iostream>
 using namespace std;
 
-int printWater(int arr[], int start, int end) {
+// use this to test on G4G site
+class Solution{
+
+  // Function to find the trapped water between the blocks.
+  public:
+  int trappingWater(int arr[], int n){
+    int* sxBound = (int*) malloc(sizeof(int) * n);
+    int* dxBound = (int*) malloc(sizeof(int) * n);
     int sum = 0;
-    int sx = arr[start];
-    int dx = arr[end];
-    int reverse = 0;
-    
-    if (start > end) {
-        reverse = 1;
+
+    int sxMax = arr[0];
+    sxBound[0] = sxMax;
+    for (int i = 1; i < n; i++) {
+      if (arr[i] >= sxMax) sxMax = arr[i];
+      sxBound[i] = sxMax;
     }
-    if (sx > dx) {
-        return printWater(arr, end, start);
-        // need to reverse
-    } else if (reverse == 0) {
-        for (int i = start; i < end; i ++) {
-            if (arr[i] <= sx) {
-                sum += sx - arr[i];
-            } else {
-                return sum + printWater(arr, i, end);
-            }
-        }
-    } else if (reverse == 1) {
-        for (int i = start; i > end; i --) {
-            if (arr[i] <= sx) {
-                sum += sx - arr[i];
-            } else {
-                return sum + printWater(arr, i, end);
-            }
-        }
+
+    int dxMax = arr[n - 1];
+    dxBound[n - 1] = dxMax;
+    for (int i = n - 2; i >= 0; i--) {
+      if (arr[i] >= dxMax) dxMax = arr[i];
+      dxBound[i] = dxMax;
+      int min = sxBound[i] < dxBound[i] ? sxBound[i] : dxBound[i];
+      sum += (min - arr[i]);
     }
+
     return sum;
-}
-
-
-int main() {
-	int n_tests = 0;
-    cin >> n_tests;
-    for (int i = 0; i < n_tests; i ++) {
-        int length = 0;
-        cin >> length;
-        int* arr = (int*) malloc(sizeof(int) * length);
-        for (int j = 0; j < length; j ++) {
-            int x = 0;
-            cin >> x;
-            arr[j] = x;
-        }
-        cout << printWater(arr, 0, length - 1) << endl;
-    }
-	return 0;
-}
+  }
+};

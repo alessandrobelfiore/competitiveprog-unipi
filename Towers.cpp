@@ -1,3 +1,8 @@
+/*  We simply sort the bars, then pick them one by one, increasing the number
+    of towers when we change value, or incrementing the counter when we don't.
+    Then we return the maximum counter
+ */
+
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -5,40 +10,40 @@ using namespace std;
 
 int towers(int arr[], int start, int end) {
 
-    std::vector<int> bars;
-    
-    for (int i = 0; i <= end; i ++) {
-        bars.push_back(arr[i]);
+  std::vector<int> bars;
+  bars.reserve(end);
+  for (int i = 0; i <= end; i ++) {
+    bars.push_back(arr[i]);
+  }
+  std::sort (bars.begin(), bars.end());
+
+  int count = 0, max = 0, current = -1, occurences = 0;
+
+  for (auto x : bars) {
+    if (x != current) {
+      count ++;
+      current = x;
+      occurences = 1;
+    } else {
+      occurences ++;
     }
-    std::sort (bars.begin(), bars.end());
+    max = std::max(max, occurences);
+  }
 
-    int count = 0, max = 0, current = -1, occurences = 0;
-
-    for (auto x : bars) {
-        if (x != current) {
-            count ++;
-            current = x;
-            occurences = 1;
-        } else {
-            occurences ++;
-        }
-        max = std::max(max, occurences);
-    }
-
-    cout << max << " " << count;
-    return 0;
+  cout << max << " " << count;
+  return 0;
 }
 
 
 int main() {
-    int length = 0;
-    cin >> length;
-    int* arr = (int*) malloc(sizeof(int) * length);
-    for (int j = 0; j < length; j ++) {
-        int x = 0;
-        cin >> x;
-        arr[j] = x;
-    }
-    towers(arr, 0, length - 1);
+  int length = 0;
+  cin >> length;
+  int* arr = (int*) malloc(sizeof(int) * length);
+  for (int j = 0; j < length; j ++) {
+    int x = 0;
+    cin >> x;
+    arr[j] = x;
+  }
+  towers(arr, 0, length - 1);
 	return 0;
 }

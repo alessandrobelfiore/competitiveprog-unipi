@@ -29,18 +29,19 @@ void numberOfWays(int64_t arr[], int64_t size, int64_t sum) {
     suffix[i] = 0;
   }
   
-  for (int64_t i=(size - 1); i >= 0; i--) {
+  currentSum += arr[size - 1];
+  if (currentSum == sum / 3) suffix[size - 1] = 1;
+
+  for (int64_t i=(size - 2); i >= 0; i--) {
     currentSum += arr[i];
     if (currentSum == sum / 3) {
       suffix[i] = 1;
-     }
-  }
-
-  // suffix sum
-  for (int64_t i=(size - 2); i >= 0; i--) {
+    }
+    // suffix sum
     suffix[i] += suffix[i + 1];
   }
 
+  // check for prefixes that equal sum / 3
   currentSum = 0;
   for (int64_t i=0; i < size - 2; i++) {
     currentSum += arr[i];
@@ -65,5 +66,5 @@ int main() {
     sum += x;
   }
   numberOfWays(arr, n, sum);
-    return 0;
+  return 0;
 }

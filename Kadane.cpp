@@ -6,32 +6,53 @@
 #include <iostream>
 using namespace std;
 
-void printKadane2(int arr[], size_t length) {
-    int sum = 0;
-    int m = arr[0];
-    for (size_t i = 0; i < length; ++i) {
-        if (sum > 0)
-            sum = sum + arr[i];
-        else 
-            sum = arr[i];
-        m = max(sum, m);
+// use this to test on G4G site
+class Solution{
+  public:
+  // arr: input array
+  // n: size of array
+  //Function to find the sum of contiguous subarray with maximum sum.
+  long long maxSubarraySum(int arr[], int n){
+    long long sum = 0;
+    long long m = arr[0];
+    for (size_t i = 0; i < n; ++i) {
+      if (sum > 0)
+        sum = sum + arr[i];
+      else
+        sum = arr[i];
+      m = sum > m ? sum : m;
     }
-    cout << m << endl;
+    return m;
+  }
+};
+
+// local test code
+void printKadane(int arr[], size_t length) {
+  int sum = 0;
+  int m = arr[0];
+  for (size_t i = 0; i < length; ++i) {
+    if (sum > 0)
+      sum = sum + arr[i];
+    else 
+      sum = arr[i];
+    m = max(sum, m);
+  }
+  cout << m << endl;
 }
 
 int main() {
 	int n_tests = 0;
-    cin >> n_tests;
-    for (int i = 0; i < n_tests; i ++) {
-        int length = 0;
-        cin >> length;
-        int* arr = (int*) malloc(sizeof(int) * length);
-        for (int j = 0; j < length; j ++) {
-            int x = 0;
-            cin >> x;
-            arr[j] = x;
-        }
-        printKadane2(arr, length);
+  cin >> n_tests;
+  for (int i = 0; i < n_tests; i ++) {
+    int length = 0;
+    cin >> length;
+    int* arr = (int*) malloc(sizeof(int) * length);
+    for (int j = 0; j < length; j ++) {
+      int x = 0;
+      cin >> x;
+      arr[j] = x;
     }
+    printKadane(arr, length);
+  }
 	return 0;
 }
