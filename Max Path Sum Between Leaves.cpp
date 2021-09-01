@@ -31,7 +31,8 @@ public:
     if (root == NULL) return 0;
   
     // else return max between maxPathSum left and right
-    recursivePathMax(root, &max);
+    int val = recursivePathMax(root, &max); // fixed for corner case where we do not update max(eg: no internal nodes)
+    if (max == INT_MIN) return val;
     return max;
   }
   
