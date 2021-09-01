@@ -1,5 +1,7 @@
-/*   
-
+/*   We build a table n * sum.
+    We fill it by putting 1 if we can obtain the current sum,
+    with the current subset of elements. The answer will be in the
+    bottom right corner.
  */
 
 class Solution{
@@ -24,7 +26,6 @@ public:
     for (int j = 0; j < sum + 1; j ++) {
       matrix[0][j] = 0;
     }
-    
     
     // general step
     for (int i = 1; i < N + 1; i ++) {

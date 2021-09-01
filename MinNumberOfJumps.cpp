@@ -1,3 +1,8 @@
+/*  We save the maximum that we can reach at any time, and 
+    the number of steps that we can still make with,
+    when the steps available reach 0 we increase number of jumps.
+ */
+
 int minJumps(int arr[], int n) {
 
   if (arr[0] == 0) return -1;

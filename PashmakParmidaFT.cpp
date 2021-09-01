@@ -55,7 +55,9 @@ int main() {
   int n;
   cin >> n;
   vector<int64_t> a;
+  a.reserve(n);
   vector<int64_t> support;
+  support.reserve(n);
   int64_t res = 0;
   
   for (int i = 0; i < n; i++) {

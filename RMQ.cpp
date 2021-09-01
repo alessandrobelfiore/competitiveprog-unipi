@@ -106,8 +106,7 @@ void updateLazy(int64_t segTree[], int64_t lazy[], int start, int stop, int64_t 
   updateLazy(segTree, lazy, start, stop, diff, mid + 1, right, pos * 2 + 2);
 
   segTree[pos] = min(segTree[pos * 2 + 1], segTree[pos * 2 + 2]);
-  }
-
+}
 
 int main() {
   int n; // dimension of the array
@@ -120,8 +119,7 @@ int main() {
   int64_t* segTree = (int64_t*) malloc(sizeof(int64_t) * STdim);
   int64_t* lazyTree = (int64_t*) malloc(sizeof(int64_t) * STdim);
   int64_t* arr = (int64_t*) malloc(sizeof(int64_t) * n);
-  vector<int64_t> anss;
-
+ 
   for (int i = 0; i < n; i++) {
     int x;
     cin >> x;
@@ -139,9 +137,12 @@ int main() {
   int64_t m; // number of queries
   cin >> m;
 
+  vector<int64_t> anss; // vector for the answers
+  anss.reserve(m);
+
   for (int i = 0; i < m + 1; i++) {
     string str;
-		vector <int> words;
+		vector<int> words;
 
 		getline(cin, str);
 		stringstream ss(str);
@@ -160,7 +161,7 @@ int main() {
       if (left <= right) anss.push_back(RMQLazy(segTree, lazyTree, left, right, 0, n - 1, 0));
       else {
         int64_t ans = min(RMQLazy(segTree, lazyTree, left, STdim - 1, 0, n - 1, 0), 
-                      RMQLazy(segTree, lazyTree, 0, right, 0, n - 1, 0));
+                          RMQLazy(segTree, lazyTree, 0, right, 0, n - 1, 0));
         anss.push_back(ans);
       }
     }

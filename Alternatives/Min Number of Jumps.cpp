@@ -35,8 +35,6 @@ int minJumps(int arr[], int n){
     int max = current_max > prev_max ? current_max : prev_max;
       
     for (int j = i; j <= max; j++) {
-      //cout << matrix[i - 1][j] << endl;
-      //cout << matrix[i][j - 1] << endl;
       if (matrix[i - 1][j] != -1) {
         matrix[i][j] = matrix[i - 1][j];
       } else if (matrix[i][j - 1] == -1) {

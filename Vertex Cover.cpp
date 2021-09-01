@@ -14,12 +14,6 @@ int solveVC(vector<vector<int>>& matrix, vector<int>& supp, int index, int paren
   //  if we already calculated this subtree vc
   if (supp[index] != -1) return supp[index];
 
-  // if it has no children (is a leaf)
-  if (matrix[index].size() == 1 && matrix[index][0] == parent) {
-    supp[index] = 0;
-    return 0;
-  }
-
   // if we take the root, take 1 and recur on children
   int withRoot = 1;
   for (auto x : matrix[index]) {
@@ -54,9 +48,8 @@ int main() {
     return 0;
   }
 
-  vector<vector<int>> adj(n);
-  // saved previous solutions
-  vector<int> support(n, -1);
+  vector<vector<int>> adj(n); // adj matrix
+  vector<int> support(n, -1); // saved previous solutions
 
   // setup the matrix of adjacencies to represent the tree
   for (int i = 0; i < n - 1; i++) {

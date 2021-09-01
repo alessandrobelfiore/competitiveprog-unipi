@@ -1,10 +1,13 @@
 /.vscode
+/.Alternatives
+/.Optionals
 *.out
 *.txt
 
 judge.cpp
 populate.cpp
 test.cpp
+MishaAndForest.cpp
 
 a
 a1

@@ -16,6 +16,7 @@ class Solution{
         
         // build a vector of pairs(ending, index)
         std::vector<std::pair<int, int>> orderedEnds;
+        orderedEnds.reserve(n);
         for (int i = 0; i < n; i ++) {
             pair<int, int> tmp = make_pair(end[i], i);
             orderedEnds.push_back(tmp);
