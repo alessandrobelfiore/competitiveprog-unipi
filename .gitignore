@@ -1,6 +1,6 @@
-/.vscode
-/.Alternatives
-/.Optionals
+vscode/
+Alternatives/
+Optionals/
 *.out
 *.txt
 
